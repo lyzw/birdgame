@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mobi.birdgame.mgmt.persistent.mapper.WxUsersMapper">
+  <resultMap id="BaseResultMap" type="mobi.birdgame.mgmt.persistent.domain.WxUsers">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="privilege" jdbcType="VARCHAR" property="privilege" />
+    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="cards" jdbcType="INTEGER" property="cards" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, openid, nickname, sex, province, city, country, headimgurl, privilege, unionid, 
+    access_token, refresh_token, cards
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wx_users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="mobi.birdgame.mgmt.persistent.domain.WxUsers">
+    insert into wx_users (user_id, openid, nickname, 
+      sex, province, city, 
+      country, headimgurl, privilege, 
+      unionid, access_token, refresh_token, 
+      cards)
+    values (#{userId,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, #{privilege,jdbcType=VARCHAR}, 
+      #{unionid,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, 
+      #{cards,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="mobi.birdgame.mgmt.persistent.domain.WxUsers">
+    insert into wx_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+      <if test="privilege != null">
+        privilege,
+      </if>
+      <if test="unionid != null">
+        unionid,
+      </if>
+      <if test="accessToken != null">
+        access_token,
+      </if>
+      <if test="refreshToken != null">
+        refresh_token,
+      </if>
+      <if test="cards != null">
+        cards,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="cards != null">
+        #{cards,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="mobi.birdgame.mgmt.persistent.domain.WxUsers">
+    update wx_users
+    <set>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        privilege = #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="cards != null">
+        cards = #{cards,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mobi.birdgame.mgmt.persistent.domain.WxUsers">
+    update wx_users
+    set openid = #{openid,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      privilege = #{privilege,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      cards = #{cards,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from wx_users
+  </select>
+
+  <select id="selectBySelective"  parameterType="mobi.birdgame.mgmt.persistent.domain.WxUsers" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    WX_USERS
+    WHERE  1=1
+    <if test="userId != null">
+      AND USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="openid != null">
+     AND OPENID = #{openid,jdbcType=VARCHAR}
+    </if>
+    <if test="nickname != null">
+     AND NICKNAME = #{nickname,jdbcType=VARCHAR}
+    </if>
+    <if test="sex != null">
+      AND SEX = #{sex,jdbcType=INTEGER}
+    </if>
+    <if test="province != null">
+     AND province =  #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="city != null">
+     AND city= #{city,jdbcType=VARCHAR}
+    </if>
+    <if test="country != null">
+      AND country = #{country,jdbcType=VARCHAR}
+    </if>
+    <if test="headimgurl != null">
+     AMD headimgurl= #{headimgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="privilege != null">
+      AND privilege = #{privilege,jdbcType=VARCHAR}
+    </if>
+    <if test="unionid != null">
+      AND unionid = #{unionid,jdbcType=VARCHAR}
+    </if>
+    <if test="accessToken != null">
+      AND accessToken= #{accessToken,jdbcType=VARCHAR}
+    </if>
+    <if test="refreshToken != null">
+      AND refreshToken= #{refreshToken,jdbcType=VARCHAR}
+    </if>
+    <if test="cards != null">
+      AND cards = #{cards,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>
