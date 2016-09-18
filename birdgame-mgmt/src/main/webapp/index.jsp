@@ -151,7 +151,7 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">消息管理</span></a>
 						<ul>
 							<li>
-								<a href="<%=basePath%>bi/gatewayRequestAmountReport/request_amount">世界消息管理</a>
+								<a href="<%=basePath%>notice/init">世界消息管理</a>
 							</li>
 						</ul>
 					</li>
@@ -159,13 +159,13 @@
 						<a href="#"><i class="fa fa-child fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">用户管理</span></a>
 						<ul>
 							<li>
-                        	<a href="user/init"> <span class="menu-item-parent">系统用户管理</span></a>
+                        	<a href="<%=basePath%>user/init"> <span class="menu-item-parent">系统用户管理</span></a>
 							</li>
 							<li>
-                        	<a href="wxuser/init"> <span class="menu-item-parent">游戏用户管理</span></a>
+                        	<a href="<%=basePath%>wxuser/init"> <span class="menu-item-parent">游戏用户管理</span></a>
 							</li>
 							<li>
-                        	<a href="sale/init"> <span class="menu-item-parent">分销商管理</span></a>
+                        	<a href="<%=basePath%>sale/init"> <span class="menu-item-parent">分销商管理</span></a>
 							</li>
 						</ul>
                     </li>
@@ -386,9 +386,6 @@
 
 		<script src="js/plugin/jqgrid/jquery.jqGrid.min.js"></script>
 		<script src="js/plugin/jqgrid/grid.locale-en.min.js"></script>
-
-		<script src="js/sock/sockjs-0.3.4.min.js"></script>
-		<script src="js/sock/hitaodatacentersock.js"></script>
 
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<%--<script type="text/javascript">

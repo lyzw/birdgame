@@ -8,6 +8,7 @@
         <param-value>mgmt.root</param-value>
     </context-param>
 
+
     <!--
     log4j的配置，采用log4j2替代，web3.0不需要专门进行配置
         <context-param>

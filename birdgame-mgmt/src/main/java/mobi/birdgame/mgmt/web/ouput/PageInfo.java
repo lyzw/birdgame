@@ -1,4 +1,4 @@
-package mobi.birdgame.web.ouput;
+package mobi.birdgame.mgmt.web.ouput;
 
 /**
  * Created by zhouwei on 2016/9/1.

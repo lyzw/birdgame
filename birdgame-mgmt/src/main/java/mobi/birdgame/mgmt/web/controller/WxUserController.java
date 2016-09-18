@@ -1,13 +1,16 @@
-package mobi.birdgame.web.controller;
+package mobi.birdgame.mgmt.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import mobi.birdgame.common.util.StringUtils;
+import mobi.birdgame.common.util.http.ExHttpException;
 import mobi.birdgame.mgmt.persistent.domain.WxUsers;
 import mobi.birdgame.mgmt.persistent.mapper.WxUsersMapper;
-
+import mobi.birdgame.mgmt.web.ouput.BaseJSONOutput;
+import mobi.birdgame.mgmt.web.ouput.PatitionResultOutput;
+import mobi.birdgame.mgmt.web.util.AccoutServerRequestUtil;
+import org.apache.http.HttpException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import mobi.birdgame.web.ouput.PatitionResultOutput;
-
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhouwei on 2016/8/31.
@@ -70,5 +71,48 @@ public class WxUserController {
 
     public String registerHx(Integer userId){
         return "";
+    }
+
+    /**
+     * 获取userId对应的微信用户详细信息
+     * @param userId    微信用户id
+     * @return  微信用户详情页面
+     */
+    @RequestMapping(value = "detailPage")
+    public ModelAndView detailPage(Integer userId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("wxusermgmt/wxuserdetail");
+        modelAndView.addObject("user",usersMapper.selectByPrimaryKey(userId));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "refresh",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String refresh(Integer userId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("wxusermgmt/wxuserdetail");
+        try{
+            String res = AccoutServerRequestUtil.registerHuanxinUser(userId);
+            BaseJSONOutput data = JSON.parseObject(res,BaseJSONOutput.class);
+            if (data.getCode() != 200){
+                return  BaseJSONOutput.fail(data.getCode(),data.getMessage()).toJSONString();
+            }
+            return  BaseJSONOutput.success(null).toJSONString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return  BaseJSONOutput.fail().toJSONString();
+
+        } catch (HttpException e) {
+            e.printStackTrace();
+            return  BaseJSONOutput.fail(null).toJSONString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return  BaseJSONOutput.fail(null).toJSONString();
+
+        } catch (ExHttpException e) {
+            e.printStackTrace();
+            return  BaseJSONOutput.fail(null).toJSONString();
+        }
     }
 }

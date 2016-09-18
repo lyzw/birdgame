@@ -1,7 +1,13 @@
-package mobi.birdgame.web.ouput;
+package mobi.birdgame.mgmt.web.ouput;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
@@ -9,6 +15,8 @@ import java.util.List;
  * Created by zhouwei on 2016/9/1.
  */
 public class PatitionResultOutput {
+
+    private static Logger logger = LogManager.getLogger(PatitionResultOutput.class);
 
     private PageInfo page;
     private List list;
@@ -32,5 +40,10 @@ public class PatitionResultOutput {
 
     public void setList(List list) {
         this.list = list;
+    }
+
+    public String toJSONString(){
+        logger.debug("the page info is [{}]",JSON.toJSONString(this));
+        return JSON.toJSONString(this);
     }
 }

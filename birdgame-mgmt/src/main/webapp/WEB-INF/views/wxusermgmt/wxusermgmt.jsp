@@ -7,6 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()
+            +":"+request.getServerPort()+path+"/";
+%>
+<base href="<%=basePath%>">
+
 <head>
     <title>Title</title>
 </head>
@@ -62,9 +69,11 @@
             {dataName:"province",text:"省份"},
             {dataName:"city",text:"城市"},
             {dataName:"openid",text:"openid"},
-            {dataName:"unionid",text:"unionid"},
             {dataName:"cards",text:"房卡数"},
-            {dataName:"oper",text:"操作",format:'operation'}
+            {dataName:"oper",text:"操作",format:'operation'},
+            /*
+             {dataName:"unionid",text:"unionid"},
+             */
 
             /*
              {dataName:"country",text:"国家"},
@@ -119,14 +128,31 @@
     }
 
     function operation(row){
-        return '<a href="wxuser/refresh?userId='+ row.userId + '">刷新用户</a> '
-                + '| <a href="wxuser/manageCards?userId='+ row.userId + '">房卡管理</a>'
-                + '| <a href="user/registerHx?userId='+ row.userId + '">注册环信账号</a>'
+        return '<nav><a href="<%=basePath%>wxuser/detailPage?userId='+ row.userId + '" title="查看用户的详细信息">查看</a> '
+                + '| <a href="javascript:;" onclick="doRereshUser(' + row.userId  + ')" title="重新从微信获取客户的信息">刷新用户</a>'
+                + '| <a href="<%=basePath%>wxuser/manageCards?userId='+ row.userId + '" title="管理用户的房卡">房卡管理</a>'
+                + '| <a href="#" onclick="registerHx(\'' + row.userId  + '\')" title="给用户注册环信账号">注册环信账号</a></nav>'
     }
 
+    function doRereshUser(userId) {
+
+    }
+    function registerHx(userId) {
+        $.ajax({
+            type:"GET",
+            url:'wxuser/refresh?userId='+ userId ,
+            success:function (data) {
+                console.info(data)
+                var jsonData = eval("("+data+")");
+                if(jsonData.code == 200){
+                    alert("注册环信账号成功");
+                }else{
+                    alert("注册环信账号失败，失败原因为："+ jsonData.message)
+                }
+            }
+        });
 
 
-
-
+    }
 </script>
 </html>

@@ -47,7 +47,11 @@
             tbHeadHtml += '<th>序号</th>';
         }
         $(setting.columns).each(function(index,value){
-            tbHeadHtml += '<th>' + value.text + '</th>'
+            if (typeof (value.css) != "undefined"){
+                tbHeadHtml += '<th class="' + value.css + '">' + value.text + '</th>'
+            }else {
+                tbHeadHtml += '<th>' + value.text + '</th>'
+            }
         });
         tbHeadHtml += headHtmlEnd;
 
@@ -69,7 +73,16 @@
                 }else{
                     value = eval('dataValue.'+ cfgValue.dataName);
                 }
-                tbBodyHtml += '<td>'+ nullToBlank(value) + '</td>';
+                value = nullToBlank(value);
+                var subvalue = value;
+                if(typeof (cfgValue.size != "undefined") && value.toString().length > cfgValue.size  ){
+                    subvalue = value.toString().substr(0,cfgValue.size-2) +"...";
+                }
+                if (typeof (cfgValue.css) != "undefined"){
+                    tbBodyHtml += '<td class="' + cfgValue.css + '" title="'+ value+'">' + subvalue + '</td>'
+                }else{
+                    tbBodyHtml += '<td>'+ subvalue + '</td>';
+                }
             });
             tbBodyHtml += '</tr>';
         });

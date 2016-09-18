@@ -27,6 +27,11 @@
             <!--<appender-ref ref="Console" />-->
             <appender-ref ref="ErrorLog" />
         </logger>
+
+        <logger name="com.mchange.v2.c3p0" level="info" additivity="false">
+            <!--<appender-ref ref="Console" />-->
+            <appender-ref ref="ErrorLog" />
+        </logger>
         <logger name="org.apache.http" level="debug" additivity="false">
             <!--<appender-ref ref="Console" />-->
             <appender-ref ref="ErrorLog" />

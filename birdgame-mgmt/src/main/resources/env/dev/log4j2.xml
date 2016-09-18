@@ -27,6 +27,11 @@
             <!--<appender-ref ref="Console" />-->
             <appender-ref ref="ErrorLog" />
         </logger>
+
+        <logger name="com.mchange.v2" level="info" additivity="false">
+            <!--<appender-ref ref="Console" />-->
+            <appender-ref ref="ErrorLog" />
+        </logger>
         <logger name="org.apache.http" level="debug" additivity="false">
             <!--<appender-ref ref="Console" />-->
             <appender-ref ref="ErrorLog" />
@@ -37,6 +42,10 @@
         </logger>
         <logger name="org.mybatis" level="debug" additivity="false">
             <!--<appender-ref ref="Console" />-->
+            <appender-ref ref="ErrorLog" />
+        </logger>
+        <logger name="org.springframework" level="debug" additivity="false">
+            <appender-ref ref="Console" />
             <appender-ref ref="ErrorLog" />
         </logger>
         <root level="debug">
