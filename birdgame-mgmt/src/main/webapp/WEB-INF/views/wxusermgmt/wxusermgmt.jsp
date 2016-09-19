@@ -129,9 +129,7 @@
 
     function operation(row){
         return '<nav><a href="<%=basePath%>wxuser/detailPage?userId='+ row.userId + '" title="查看用户的详细信息">查看</a> '
-                + '| <a href="javascript:;" onclick="doRereshUser(' + row.userId  + ')" title="重新从微信获取客户的信息">刷新用户</a>'
-                + '| <a href="<%=basePath%>wxuser/manageCards?userId='+ row.userId + '" title="管理用户的房卡">房卡管理</a>'
-                + '| <a href="#" onclick="registerHx(\'' + row.userId  + '\')" title="给用户注册环信账号">注册环信账号</a></nav>'
+                + '| <a href="<%=basePath%>wxuser/manageCards?userId='+ row.userId + '" title="管理用户的房卡">房卡管理</a>';
     }
 
     function doRereshUser(userId) {

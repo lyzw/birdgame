@@ -18,8 +18,8 @@
     }
 
     table td {
-        border-style: solid;
-        border-width: 1px;
+       /* border-style: solid;
+        border-width: 1px;*/
         border-color: #666666;
         line-height: 2em;
     }

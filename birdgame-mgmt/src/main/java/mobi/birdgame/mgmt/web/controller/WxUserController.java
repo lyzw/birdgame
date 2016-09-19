@@ -115,4 +115,35 @@ public class WxUserController {
             return  BaseJSONOutput.fail(null).toJSONString();
         }
     }
+
+    /**
+     * 获取userId对应的微信用户房卡管理页面
+     * @param userId    微信用户id
+     * @return  微信用户详情页面
+     */
+    @RequestMapping(value = "manageCards")
+    public ModelAndView manageCards(Integer userId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("wxusermgmt/manageCards");
+        modelAndView.addObject("user",usersMapper.selectByPrimaryKey(userId));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "updateCards",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String updateCards(Integer userId,Integer cards){
+        if (userId == null || cards== null || cards<0){
+            return BaseJSONOutput.fail(500,"参数异常").toJSONString();
+        }
+        try {
+            WxUsers user = new WxUsers();
+            user.setUserId(userId);
+            user.setCards(cards);
+            int size = usersMapper.updateByPrimaryKeySelective(user);
+            return BaseJSONOutput.success(size).toJSONString();
+        }catch (Exception e){
+            return  BaseJSONOutput.fail(500,e.getMessage()).toJSONString();
+        }
+
+    }
 }

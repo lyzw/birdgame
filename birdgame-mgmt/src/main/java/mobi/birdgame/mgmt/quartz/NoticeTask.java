@@ -32,15 +32,19 @@ public class NoticeTask implements Job {
     RedisTemplate redisTemplate;
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
-        JobDataMap dataMap = context.getMergedJobDataMap();
-        Jedis jedis = RedisUtil.getJedis();
-        Notice data = (Notice)dataMap.get("data");
-        Map map = new HashMap();
-        logger.info("{}通知写入redis" ,data.getTitle());
-        map.put("title",data.getTitle());
-        map.put("content",data.getContent());
-        map.put("datetime",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        jedis.lpush(MgmtConstants.REDIS_NOTICE_LIST_KEY, JSON.toJSONString(map));
-        RedisUtil.returnResource(jedis);
+        try {
+            JobDataMap dataMap = context.getMergedJobDataMap();
+            Jedis jedis = RedisUtil.getJedis();
+            Notice data = (Notice) dataMap.get("data");
+            Map map = new HashMap();
+            logger.info("{}通知写入redis", data.getTitle());
+            map.put("title", data.getTitle());
+            map.put("content", data.getContent());
+            map.put("datetime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            jedis.lpush(MgmtConstants.REDIS_NOTICE_LIST_KEY, JSON.toJSONString(map));
+            RedisUtil.returnResource(jedis);
+        }catch (Exception e){
+            logger.error("execute notice error:",e);
+        }
     }
 }
