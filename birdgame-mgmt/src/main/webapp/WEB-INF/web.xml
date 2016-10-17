@@ -24,6 +24,18 @@
         </listener>
     -->
 
+    <!-- spring security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
     <!--  字符集 过滤器  -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -43,6 +55,9 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
+
 
     <!--  自定义过滤器  -->
     <!--<filter>

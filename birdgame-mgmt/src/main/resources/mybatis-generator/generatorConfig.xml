@@ -140,7 +140,7 @@
        注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
        -->
 
-        <!--<table tableName="users"
+        <table tableName="users"
                domainObjectName="Users"
                enableCountByExample="false"
                enableUpdateByExample="false"
@@ -154,7 +154,7 @@
             <property name="modelOnly" value="false"/>
             <property name="selectAllOrderByClause" value="age desc,username asc"/>
             <property name="useActualColumnNames" value="false"/>
-        </table>-->
+        </table>
 
 
         <!--<table tableName="wx_users"
@@ -173,7 +173,7 @@
             <property name="useActualColumnNames" value="false"/>
         </table>-->
 
-        <table tableName="notice"
+        <!--<table tableName="notice"
                domainObjectName="Notice"
                enableCountByExample="false"
                enableUpdateByExample="false"
@@ -188,7 +188,7 @@
             <property name="selectAllOrderByClause" value="age desc,username asc"/>
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="content" jdbcType="VARCHAR"/>
-        </table>
+        </table>-->
 
         <!-- &lt;!&ndash; 不生成Example &ndash;&gt;
          <table tableName="WD_DEMO_INFO"

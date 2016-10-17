@@ -17,6 +17,8 @@ public class Users extends BaseDo implements Serializable {
 
     private String refId;
 
+    private String roles;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -73,5 +75,13 @@ public class Users extends BaseDo implements Serializable {
 
     public void setRefId(String refId) {
         this.refId = refId == null ? null : refId.trim();
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles == null ? null : roles.trim();
     }
 }

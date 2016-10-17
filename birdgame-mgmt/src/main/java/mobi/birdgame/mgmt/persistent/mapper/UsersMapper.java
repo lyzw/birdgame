@@ -17,5 +17,5 @@ public interface UsersMapper {
 
     int updateByPrimaryKey(Users record);
 
-    List selectBySelective(Users record);
+    List<Users> selectBySelective(Users record);
 }

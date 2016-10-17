@@ -77,7 +77,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <img src="img/logo_hitao.png" alt="嗨淘数据中心"> </span>
+				<span id="logo"> <img src="img/logo-birdgame.png" alt="嗨淘数据中心"> </span>
 				<!-- END LOGO PLACEHOLDER -->
 
 			</div>

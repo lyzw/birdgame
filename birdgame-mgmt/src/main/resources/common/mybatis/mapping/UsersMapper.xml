@@ -9,9 +9,10 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="ref_id" jdbcType="VARCHAR" property="refId" />
+    <result column="roles" jdbcType="VARCHAR" property="roles" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, name, password, nick_name, state, type, ref_id
+    user_id, name, password, nick_name, state, type, ref_id, roles
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="mobi.birdgame.mgmt.persistent.domain.Users">
     insert into users (user_id, name, password, 
       nick_name, state, type, 
-      ref_id)
+      ref_id, roles)
     values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
-      #{refId,jdbcType=VARCHAR})
+      #{refId,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="mobi.birdgame.mgmt.persistent.domain.Users">
     insert into users
@@ -55,6 +56,9 @@
       <if test="refId != null">
         ref_id,
       </if>
+      <if test="roles != null">
+        roles,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -77,6 +81,9 @@
       </if>
       <if test="refId != null">
         #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +108,9 @@
       <if test="refId != null">
         ref_id = #{refId,jdbcType=VARCHAR},
       </if>
+      <if test="roles != null">
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -111,7 +121,37 @@
       nick_name = #{nickName,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
-      ref_id = #{refId,jdbcType=VARCHAR}
+      ref_id = #{refId,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectBySelective" parameterType="mobi.birdgame.mgmt.persistent.domain.Users" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    users
+    WHERE  1=1
+    <if test="name != null">
+      AND name = #{name,jdbcType=VARCHAR},
+    </if>
+    <if test="password != null">
+      AND password = #{password,jdbcType=VARCHAR},
+    </if>
+    <if test="nickName != null">
+      AND nick_name = #{nickName,jdbcType=VARCHAR},
+    </if>
+    <if test="state != null">
+      AND state = #{state,jdbcType=INTEGER},
+    </if>
+    <if test="type != null">
+      AND type = #{type,jdbcType=INTEGER},
+    </if>
+    <if test="refId != null">
+      AND ref_id = #{refId,jdbcType=VARCHAR},
+    </if>
+    <if test="roles != null">
+      AND roles = #{roles,jdbcType=VARCHAR},
+    </if>
+  </select>
 </mapper>
